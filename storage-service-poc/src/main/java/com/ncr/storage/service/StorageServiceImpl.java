@@ -97,10 +97,10 @@ public class StorageServiceImpl implements StorageService {
                 BlobInfo blobInfo = null;
 
                 try (InputStream uploadedStream = item.getInputStream()){
-                   blobInfo = BlobInfo.newBuilder(bucketName, dto.getFilePath())
-                           .setContentType(item.getContentType())
-                           .setContentDisposition(String.format("inline; filename=\"%s\"", filename))
-                           .build();
+                    blobInfo = BlobInfo.newBuilder(bucketName, dto.getFilePath())
+                            .setContentType(item.getContentType())
+                            .setContentDisposition(String.format("inline; filename=\"%s\"", filename))
+                            .build();
                     try (WriteChannel writer = storage.writer(blobInfo)) {
                         ByteStreams.copy(uploadedStream, Channels.newOutputStream(writer));
                     }
@@ -156,9 +156,9 @@ public class StorageServiceImpl implements StorageService {
 
     private String getBasePath () {
         StringBuilder base = new StringBuilder()
-                .append(baseURI.endsWith("/") ? baseURI : baseURI + "/")
-                .append(bucketName)
-                .append("/");
+                .append(baseURI.endsWith("/") ? baseURI : baseURI + "/");
+//                .append(bucketName)
+//                .append("/");
 
         return base.toString();
     }

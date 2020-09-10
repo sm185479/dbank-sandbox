@@ -5,12 +5,16 @@ import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
 @Configuration
+@ConditionalOnProperty(
+        value="gcp.storage.enabled",
+        havingValue = "true")
 public class GCPConfig {
 
     @Value("${gcp.storage.bucket.name}")
